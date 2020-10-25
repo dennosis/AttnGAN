@@ -147,7 +147,7 @@ class TextDataset(data.Dataset):
         for i in range(len(filenames)):
             cap_path = '%s/text/%s.txt' % (data_dir, filenames[i])
             with open(cap_path, "r") as f:
-                captions = f.read().decode('utf8').split('\n')
+                captions = f.read().split('\n')
                 cnt = 0
                 for cap in captions:
                     if len(cap) == 0:
@@ -269,6 +269,7 @@ class TextDataset(data.Dataset):
     def get_caption(self, sent_ix):
         # a list of indices for a sentence
         sent_caption = np.asarray(self.captions[sent_ix]).astype('int64')
+        #print(sent_caption)
         if (sent_caption == 0).sum() > 0:
             print('ERROR: do not need END (0) token', sent_caption)
         num_words = len(sent_caption)
